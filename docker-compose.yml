@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  app:
+    image: gamiprotocol/app:latest
+    container_name: gami-protocol-app
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://gami:${POSTGRES_PASSWORD}@postgres:5432/gamidb
+      - SESSION_SECRET=${SESSION_SECRET}
+      - API_BASE_URL=${API_BASE_URL}
+      - CORS_ORIGINS=${CORS_ORIGINS}
+      - SOLANA_ENDPOINT=${SOLANA_ENDPOINT}
+      - TOKEN_ADDRESS=${TOKEN_ADDRESS}
+    networks:
+      - gami-network
+    volumes:
+      - app-logs:/app/logs
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: gami-protocol-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=gami
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=gamidb
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - gami-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gami"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  nginx:
+    image: nginx:alpine
+    container_name: gami-protocol-nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/logs:/var/log/nginx
+    depends_on:
+      - app
+    networks:
+      - gami-network
+
+networks:
+  gami-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  app-logs:

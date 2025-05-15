@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+      --background: 0 0% 100%;
+--foreground: 0 0% 0%;
+--muted: 60 4.8% 95.9%;
+--muted-foreground: 25 5.3% 44.7%;
+--popover: 0 0% 100%;
+--popover-foreground: 0 0% 0%;
+--card: 0 0% 100%;
+--card-foreground: 0 0% 0%;
+--border: 20 5.9% 90%;
+--input: 20 5.9% 90%;
+--primary: 263 60% 50%;
+--primary-foreground: 0 0% 100%;
+--primary-light: 262 60% 65%;
+--primary-dark: 264 60% 35%;
+--secondary: 60 4.8% 95.9%;
+--secondary-foreground: 24 9.8% 10%;
+--accent: 262 60% 95%;
+--accent-foreground: 264 60% 35%;
+--destructive: 0 84.2% 60.2%;
+--destructive-foreground: 60 9.1% 97.8%;
+--ring: 263 60% 50%;
+--radius: 0.5rem;
+  }
+  .dark {
+      --background: 240 10% 3.9%;
+--foreground: 0 0% 98%;
+--muted: 240 3.7% 15.9%;
+--muted-foreground: 240 5% 64.9%;
+--popover: 240 10% 3.9%;
+--popover-foreground: 0 0% 98%;
+--card: 240 10% 3.9%;
+--card-foreground: 0 0% 98%;
+--border: 240 3.7% 15.9%;
+--input: 240 3.7% 15.9%;
+--primary: 263 60% 50%;
+--primary-foreground: 0 0% 100%;
+--primary-light: 262 60% 65%;
+--primary-dark: 264 60% 35%;
+--secondary: 240 3.7% 15.9%;
+--secondary-foreground: 0 0% 98%;
+--accent: 262 60% 25%;
+--accent-foreground: 0 0% 98%;
+--destructive: 0 62.8% 30.6%;
+--destructive-foreground: 0 0% 98%;
+--ring: 263 60% 50%;
+--radius: 0.5rem;
+  }
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+/* Custom styles for Tabs */
+.tabs-list [data-state="active"] {
+  @apply bg-[#7631f9] text-white;
+}
+
+.tabs-list [data-state="inactive"] {
+  @apply hover:text-[#7631f9];
+}
+
+/* Custom styles for Shepherd tutorial */
+.shepherd-theme-custom {
+  @apply rounded-lg shadow-lg;
+}
+
+.shepherd-theme-custom .shepherd-content {
+  @apply rounded-lg overflow-hidden;
+}
+
+.shepherd-theme-custom .shepherd-header {
+  @apply bg-[#7631f9] text-white p-4;
+}
+
+.shepherd-theme-custom .shepherd-title {
+  @apply text-lg font-semibold;
+}
+
+.shepherd-theme-custom .shepherd-text {
+  @apply p-4 text-gray-700;
+}
+
+.shepherd-theme-custom .shepherd-footer {
+  @apply px-4 py-3 bg-gray-50 border-t border-gray-200;
+}
+
+.shepherd-theme-custom .shepherd-button {
+  @apply rounded-md px-4 py-2 text-sm font-medium transition-colors;
+}
+
+.shepherd-theme-custom .shepherd-button-secondary {
+  @apply bg-white text-gray-500 border border-gray-300 hover:bg-gray-50;
+}
+
+.shepherd-theme-custom .shepherd-button-primary {
+  @apply bg-[#7631f9] text-white hover:bg-[#9156ff];
+}
+
+.shepherd-theme-custom .shepherd-cancel-icon {
+  @apply text-white opacity-70 hover:opacity-100;
+}
+
